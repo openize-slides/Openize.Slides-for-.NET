@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Local_Repos\Openize.Slides\Openize.Slides\Openize.Slides.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Openize.Slides.Common\Openize.Slides.Common.csproj" />
+    <ProjectReference Include="..\Openize.Slides.Facade\Openize.Slides.Facade.csproj" />
+  </ItemGroup>
+
+</Project>
