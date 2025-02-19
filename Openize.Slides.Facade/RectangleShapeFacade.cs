@@ -25,8 +25,8 @@ namespace Openize.Slides.Facade
         private P.Shape _RectangleShape;
         private SlidePart _AssociatedSlidePart;// Store the P.Shape as a private field
         private int _ShapeIndex;
-    
-        
+        private AnimationType _Animation = AnimationType.None;
+
         private String _BackgroundColor;
         private ListFacade _TextList = null;
        
@@ -39,6 +39,7 @@ namespace Openize.Slides.Facade
         public int ShapeIndex { get => _ShapeIndex; set => _ShapeIndex = value; }
         public string BackgroundColor { get => _BackgroundColor; set => _BackgroundColor = value; }
         public ListFacade TextList { get => _TextList; set => _TextList = value; }
+        public AnimationType Animation { get => _Animation; set => _Animation = value; }
 
         public RectangleShapeFacade()
         {
@@ -457,19 +458,16 @@ namespace Openize.Slides.Facade
 
         private static TextAlignment ConvertAlignmentFromTypeValues(TextAlignmentTypeValues alignmentType)
         {
-            switch (alignmentType)
-            {
-                case TextAlignmentTypeValues.Left:
-                    return TextAlignment.Left;
-                case TextAlignmentTypeValues.Center:
-                    return TextAlignment.Center;
-                case TextAlignmentTypeValues.Right:
-                    return TextAlignment.Right;
-                case TextAlignmentTypeValues.Justified:
-                    return TextAlignment.None;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(alignmentType), alignmentType, null);
-            }
+            if (alignmentType.Equals(TextAlignmentTypeValues.Left))
+                return TextAlignment.Left;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Center))
+                return TextAlignment.Center;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Right))
+                return TextAlignment.Right;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Justified))
+                return TextAlignment.None;
+
+            throw new ArgumentOutOfRangeException(nameof(alignmentType), alignmentType, null);
         }
     }
 }

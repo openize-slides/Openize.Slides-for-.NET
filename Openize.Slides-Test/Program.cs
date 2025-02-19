@@ -6,6 +6,7 @@ using GeneratedCode;
 using Openize.Slides;
 using System.Collections.Generic;
 using Openize.Slides.Common;
+//using DocumentFormat.OpenXml.Presentation;
 
 
 
@@ -13,8 +14,11 @@ class Program
 {
     static void Main()
     {
-        /* Create new Presentation
-         Presentation presentation = Presentation.Create("D:\\AsposeSampleResults\\test2.pptx");
+        /*
+        // Create new Presentation
+         Presentation presentation = Presentation.Create("D:\\AsposeSampleResults\\to.pptx");
+        presentation.SlideWidth = 960;
+        presentation.SlideHeight = 720;
          TextShape shape = new TextShape();
          shape.Text = "Title: Here is my first title From FF";
          shape.TextColor = "980078";
@@ -22,7 +26,7 @@ class Program
          TextShape shape2 = new TextShape();
          shape2.Text = "Body : Here is my first title From FF";
          shape2.FontFamily = "BIZ UDGothic";
-         shape2.FontSize = 3000;
+         shape2.FontSize = 30;
          shape2.Y = Utility.EmuToPixels(2499619);
          // First slide
          Slide slide = new Slide();
@@ -35,16 +39,17 @@ class Program
          // Adding slides
          presentation.AppendSlide(slide);
          presentation.AppendSlide(slide1);
-         presentation.Save();*/
-        /*
-        Presentation presentation = Presentation.Create("D:\\AsposeSampleResults\\test2.pptx");
-        TextShape shape = new TextShape();
+         presentation.Save();
+        presentation.close();*/
+        
+       /* Presentation presentation2 = Presentation.Create("D:\\AsposeSampleResults\\test2.pptx");
+        TextShape shape21 = new TextShape();
         shape.Text = "Title: Here is my first title From FF";
         shape.BackgroundColor = "5f7200";
         shape.FontSize = 80;
         shape.TextColor = "980078";
         shape.FontFamily = "Baguet Script";
-        TextShape shape2 = new TextShape();
+        TextShape shape22 = new TextShape();
 
         shape2.BackgroundColor = "ff7f90";
         List<TextSegment> TextSegments = new List<TextSegment>();
@@ -53,14 +58,14 @@ class Program
         
         shape2.Y = Utility.EmuToPixels(3499619);
         // First slide
-        Slide slide = new Slide();
-        slide.AddTextShapes(shape);
-        slide.AddTextShapes(shape2, TextSegments);
+        Slide slide21 = new Slide();
+        slide21.AddTextShapes(shape21);
+        slide21.AddTextShapes(shape22, TextSegments);
         
         // Adding slides
-        presentation.AppendSlide(slide);
+        presentation2.AppendSlide(slide21);
         
-        presentation.Save();*/
+        presentation2.Save();*/
 
         /* Open and update a PPTX file
         Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\sample.pptx");
@@ -393,22 +398,159 @@ class Program
         //presentation.SaveAllNotesToTextFile("D:\\AsposeSampleData\\Notes.txt");
         presentation.Save();*/
 
-       /* Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
-        Slide slide = new Slide();
+        /* Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+         Slide slide = new Slide();
 
-        Circle circle = new Circle();
-        circle.Width = 500.0;
-        circle.Height =300.0;
-        circle.X = circle.Width / 2;
-        circle.Y = circle.Height / 2;
-        circle.BackgroundColor = "5f7200";
-        slide.DrawCircle(circle);
+         Triangle triangle = new Triangle();
+         triangle.Width = 500.0;
+         triangle.Height =300.0;
+         triangle.X = triangle.Width / 2;
+         triangle.Y = triangle.Height / 2;
+         triangle.BackgroundColor = "5f7200";
+         slide.DrawTriangle(triangle);
+         presentation.AppendSlide(slide);
+         presentation.Save();*/
+
+        /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+        
+        Diamond diamond = new Diamond();
+        diamond.Width = 500.0;
+        diamond.Height = 300.0;
+        diamond.X = diamond.Width / 2;
+        diamond.Y = diamond.Height / 2;
+        diamond.BackgroundColor = "5f7200";
+        slide.DrawDiamond(diamond);
         presentation.AppendSlide(slide);
         presentation.Save();*/
 
         /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        Line line = new Line();
+        line.Width = 300.0;
+        line.Height = 50.0;
+        line.X = line.Width / 2;
+        line.Y = line.Height + 200 / 2;
+        slide.DrawLine(line);
+        presentation.AppendSlide(slide);
+        presentation.Save();*/
+        /*
+        Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        Arrow arrow = new Arrow();
+        arrow.Width = 300.0;
+        arrow.Height = 50.0;
+        arrow.X = arrow.Width / 2;
+        arrow.Y = arrow.Height + 200 / 2;
+        slide.DrawArrow(arrow);
+        presentation.AppendSlide(slide);
+        presentation.Save();
+        */
+        /*
+        Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        DoubleArrow doubleArrow = new DoubleArrow();
+        doubleArrow.Width = 300.0;
+        doubleArrow.Height = 50.0;
+        doubleArrow.X = doubleArrow.Width / 2;
+        doubleArrow.Y = doubleArrow.Height + 200 / 2;
+        slide.DrawDoubleArrow(doubleArrow);
+        presentation.AppendSlide(slide);
+        presentation.Save();
+        */
+        /* Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+         Slide slide = new Slide();
+
+         CurvedLine curvedLine = new CurvedLine();
+         curvedLine.Width = 300.0;
+         curvedLine.Height = 50.0;
+         curvedLine.X = curvedLine.Width / 2;
+         curvedLine.Y = curvedLine.Height + 200 / 2;
+         slide.DrawCurvedLine(curvedLine);
+         presentation.AppendSlide(slide);
+         presentation.Save();
+        */
+        /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
         Slide slide = presentation.GetSlides()[2];
         slide.Rectangles[0].Remove();
+        presentation.Save();*/
+        /*
+        Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        DoubleBrace doubleBrace = new DoubleBrace();
+        doubleBrace.Width = 300.0;
+        doubleBrace.Height = 50.0;
+        doubleBrace.X = doubleBrace.Width / 2;
+        doubleBrace.Y = doubleBrace.Height + 200 / 2;
+        slide.DrawDoubleBrace(doubleBrace);
+        presentation.AppendSlide(slide);
+        presentation.Save();*/
+
+        /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        Pentagon pentagon = new Pentagon();
+        pentagon.Width = 300.0;
+        pentagon.Height = 50.0;
+        pentagon.X = pentagon.Width / 2;
+        pentagon.Y = pentagon.Height + 200 / 2;
+        slide.DrawPentagon(pentagon);
+        presentation.AppendSlide(slide);
+        presentation.Save();*/
+
+        /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+
+        DoubleBracket doubleBracket = new DoubleBracket();
+        doubleBracket.Width = 300.0;
+        doubleBracket.Height = 50.0;
+        doubleBracket.X = doubleBracket.Width / 2;
+        doubleBracket.Y = doubleBracket.Height + 200 / 2;
+        slide.DrawDoubleBracket(doubleBracket);
+        presentation.AppendSlide(slide);
+        presentation.Save();
+        */
+
+        /* Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+         Slide slide = new Slide();
+
+         Hexagon hexagon = new Hexagon();
+         hexagon.Width = 300.0;
+         hexagon.Height = 300.0;
+         hexagon.X = 300.0;
+         hexagon.Y = 300.0;
+         slide.DrawHexagon(hexagon);
+         presentation.AppendSlide(slide);
+         presentation.Save();*/
+
+        /*Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+         Slide slide = new Slide();
+
+         Trapezoid trapezoid = new Trapezoid();
+        trapezoid.Animation = Openize.Slides.Common.Enumerations.AnimationType.FlyIn;
+         trapezoid.Width = 300.0;
+         trapezoid.Height = 300.0;
+         trapezoid.X = 300.0;
+         trapezoid.Y = 300.0;
+         slide.DrawTrapezoid(trapezoid);
+         presentation.AppendSlide(slide);
+         presentation.Save();*/
+        
+       /* Presentation presentation = Presentation.Open("D:\\AsposeSampleData\\draw.pptx");
+        Slide slide = new Slide();
+        
+        Pie pie = new Pie();
+        pie.Animation = Openize.Slides.Common.Enumerations.AnimationType.FlyIn;
+        pie.Width = 300.0;
+        pie.Height = 300.0;
+        pie.X = 300.0;
+        pie.Y = 300.0;
+        slide.DrawPie(pie);
+        presentation.AppendSlide(slide);
         presentation.Save();*/
 
     }

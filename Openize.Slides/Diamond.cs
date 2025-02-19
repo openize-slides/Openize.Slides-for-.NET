@@ -7,15 +7,15 @@ using System.Collections.Generic;
 namespace Openize.Slides
 {
     /// <summary>
-    /// This class represents the circle shape within a slide.
+    /// This class represents the Diamond shape within a slide.
     /// </summary>
-    public class Circle
+    public class Diamond
     {
         private double _x;
         private double _y;
         private double _Width;
         private double _Height;
-        private CircleShapeFacade _Facade;
+        private DiamondShapeFacade _Facade;
         private int _shapeIndex;
         private string _BackgroundColor = null;
         private AnimationType _Animation = AnimationType.None;
@@ -40,9 +40,9 @@ namespace Openize.Slides
         public double Height { get => _Height; set => _Height = value; }
 
         /// <summary>
-        /// Property to get or set the CircleShapeFacade.
+        /// Property to get or set the DiamondShapeFacade.
         /// </summary>
-        public CircleShapeFacade Facade { get => _Facade; set => _Facade = value; }
+        public DiamondShapeFacade Facade { get => _Facade; set => _Facade = value; }
 
         /// <summary>
         /// Property to get or set the shape index within a slide.
@@ -50,20 +50,20 @@ namespace Openize.Slides
         public int ShapeIndex { get => _shapeIndex; set => _shapeIndex = value; }
 
         /// <summary>
-        /// Property to set or get background color of a circle shape.
+        /// Property to set or get background color of a Diamond shape.
         /// </summary>
         public string BackgroundColor { get => _BackgroundColor; set => _BackgroundColor = value; }
-
+        
         /// <summary>
         /// Property to set animation
         /// </summary>
         public AnimationType Animation { get => _Animation; set => _Animation = value; }
         /// <summary>
-        /// Constructor of the Circle class initializes the object of CircleShapeFacade and populates its fields.
+        /// Constructor of the Diamond class initializes the object of DiamondShapeFacade and populates its fields.
         /// </summary>
-        public Circle()
+        public Diamond()
         {
-            _Facade = new CircleShapeFacade();
+            _Facade = new DiamondShapeFacade();
             _Facade.ShapeIndex = _shapeIndex;
 
             _BackgroundColor = "Transparent";
@@ -76,7 +76,7 @@ namespace Openize.Slides
         }
 
         /// <summary>
-        /// Method to update circle shape.
+        /// Method to update Diamond shape.
         /// </summary>
         public void Update()
         {
@@ -97,18 +97,18 @@ namespace Openize.Slides
         }
 
         /// <summary>
-        /// Method for getting the list of circle shapes.
+        /// Method for getting the list of Diamond shapes.
         /// </summary>
-        /// <param name="CircleFacades">A list of CircleShapeFacade objects.</param>
-        /// <returns>A list of Circle objects.</returns>
-        public static List<Circle> GetCircles(List<CircleShapeFacade> CircleFacades)
+        /// <param name="DiamondFacades">A list of DiamondShapeFacade objects.</param>
+        /// <returns>A list of Diamond objects.</returns>
+        public static List<Diamond> GetDiamonds(List<DiamondShapeFacade> DiamondFacades)
         {
-            List<Circle> Circles = new List<Circle>();
+            List<Diamond> Diamonds = new List<Diamond>();
             try
             {
-                foreach (var facade in CircleFacades)
+                foreach (var facade in DiamondFacades)
                 {
-                    Circle Circle = new Circle
+                    Diamond Diamond = new Diamond
                     {
                         BackgroundColor = facade.BackgroundColor,
                         X = Utility.EmuToPixels(facade.X),
@@ -119,24 +119,24 @@ namespace Openize.Slides
                         ShapeIndex = facade.ShapeIndex
                     };
 
-                    Circles.Add(Circle);
+                    Diamonds.Add(Diamond);
                 }
             }
             catch (Exception ex)
             {
-                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Getting Circle Shapes");
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Getting Diamond Shapes");
                 throw new Common.OpenizeException(errorMessage, ex);
             }
 
-            return Circles;
+            return Diamonds;
         }
 
         /// <summary>
-        /// Method to remove the circle shape from a slide.
+        /// Method to remove the Diamond shape from a slide.
         /// </summary>
         public void Remove()
         {
-            _Facade.RemoveShape(this.Facade.CircleShape);
+            _Facade.RemoveShape(this.Facade.DiamondShape);
         }
     }
 }

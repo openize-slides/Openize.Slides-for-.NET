@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Openize.Slides.Common;
 using Openize.Slides.Common.Enumerations;
 using Openize.Slides.Facade;
@@ -21,6 +22,18 @@ namespace Openize.Slides
         private int _SlideIndex;
         private List<TextShape> _TextShapes;
         private List<Rectangle> _Rectangles;
+        private List<Triangle> _Triangles;
+        private List<Diamond> _Diamonds;
+        private List<Line> _Lines;
+        private List<CurvedLine> _CurvedLines;
+        private List<Arrow> _Arrows;
+        private List<DoubleArrow> _DoubleArrows;
+        private List<DoubleBrace> _DoubleBraces;
+        private List<DoubleBracket> _DoubleBrackets;
+        private List<Pentagon> _Pentagons;
+        private List<Hexagon> _Hexagons;
+        private List<Pie> _Pies;
+        private List<Trapezoid> _Trapezoids;
         private List<Circle> _Circles;
         private List<Image> _Images;
         private List<Table> _Tables;
@@ -28,6 +41,7 @@ namespace Openize.Slides
         private CommentFacade _CommentFacade=null;
         private Presentation _SlidePresentation;
         private int _CommentIndex = 0;
+        private AnimationType _Animation = AnimationType.None;
 
         /// <summary>
         /// Property for respective Slide Facade.
@@ -70,7 +84,61 @@ namespace Openize.Slides
         /// Property to get or set list of circles.
         /// </summary>
         public List<Circle> Circles { get => _Circles; set => _Circles = value; }
+        /// <summary>
+        /// Property to get or set list of diamonds.
+        /// </summary>
+        public List<Diamond> Diamonds { get => _Diamonds; set => _Diamonds = value; }
+        /// <summary>
+        /// Property to get or set list of triangles.
+        /// </summary>
+        public List<Triangle> Triangles { get => _Triangles; set => _Triangles = value; }
+        /// <summary>
+        /// Property to get or set list of lines.
+        /// </summary>
+        public List<Line> Lines { get => _Lines; set => _Lines = value; }
+        /// <summary>
+        /// Property to get or set list of arrows.
+        /// </summary>
+        public List<Arrow> Arrows { get => _Arrows; set => _Arrows = value; }
+        /// <summary>
+        /// Property to get or set list of double arrows.
+        /// </summary>
+        public List<DoubleArrow> DoubleArrows { get => _DoubleArrows; set => _DoubleArrows = value; }
+        /// <summary>
+        /// Property to get or set list of curved lines.
+        /// </summary>
+        public List<CurvedLine> CurvedLines { get => _CurvedLines; set => _CurvedLines = value; }
 
+        /// <summary>
+        /// Property to get or set list of double braces.
+        /// </summary>
+        public List<DoubleBrace> DoubleBraces { get => _DoubleBraces; set => _DoubleBraces = value; }
+
+        /// <summary>
+        /// Property to get or set list of Pentagons.
+        /// </summary>
+        public List<Pentagon> Pentagons { get => _Pentagons; set => _Pentagons = value; }
+
+        /// <summary>
+        /// Property to get or set list of double bracket.
+        /// </summary>
+        public List<DoubleBracket> DoubleBrackets { get => _DoubleBrackets; set => _DoubleBrackets = value; }
+
+        /// <summary>
+        /// Property to get or set list of Hexagon.
+        /// </summary>
+        public List<Hexagon> Hexagons { get => _Hexagons; set => _Hexagons = value; }
+
+        /// <summary>
+        /// Property to get or set list of Trapezoid.
+        /// </summary>
+        public List<Trapezoid> Trapezoids { get => _Trapezoids; set => _Trapezoids = value; }
+        /// <summary>
+        /// Property to get or set list of Pie.
+        /// </summary>
+        public List<Pie> Pies { get => _Pies; set => _Pies = value; }
+
+       
 
         /// <summary>
         /// Constructor for the Slide class.
@@ -89,6 +157,18 @@ namespace Openize.Slides
                 _RelationshipId = _SlideFacade.RelationshipId;
                 _TextShapes = new List<TextShape>();
                 _Rectangles = new List<Rectangle>();
+                _Diamonds = new List<Diamond>();
+                _Triangles = new List<Triangle>();
+                _Lines = new List<Line>();
+                _CurvedLines = new List<CurvedLine>();
+                _Arrows = new List<Arrow>();
+                _DoubleArrows = new List<DoubleArrow>();
+                _DoubleBraces = new List<DoubleBrace>();
+                _DoubleBrackets = new List<DoubleBracket>();
+                _Pentagons = new List<Pentagon>();
+                _Hexagons = new List<Hexagon>();
+                _Trapezoids = new List<Trapezoid>();
+                _Pies = new List<Pie>();
                 _Circles = new List<Circle>();
                 _Images = new List<Image>();
                 _Tables = new List<Table>();
@@ -117,7 +197,19 @@ namespace Openize.Slides
             _RelationshipId = _SlideFacade.RelationshipId;
             _TextShapes = new List<TextShape>();
             _Rectangles = new List<Rectangle>();
+            _Diamonds = new List<Diamond>();
+            _Triangles = new List<Triangle>();
             _Circles = new List<Circle>();
+            _Lines = new List<Line>();
+            _CurvedLines = new List<CurvedLine>();
+            _Arrows = new List<Arrow>();
+            _DoubleArrows = new List<DoubleArrow>();
+            _DoubleBraces = new List<DoubleBrace>();
+            _DoubleBrackets = new List<DoubleBracket>();
+            _Pentagons = new List<Pentagon>();
+            _Hexagons = new List<Hexagon>();
+            _Trapezoids = new List<Trapezoid>();
+            _Pies = new List<Pie>();
             _Images = new List<Image>();
             _Tables = new List<Table>();
             _CommentFacade = new CommentFacade();
@@ -159,14 +251,284 @@ namespace Openize.Slides
         /// <param name="rect"></param>
         /// <exception cref="Common.OpenizeException"></exception>
         public void DrawRectangle(Rectangle rect)
-        {          
-
+        {
             try
             {
-                rect.Facade = _SlideFacade.DrawRectangle(Utility.PixelsToEmu(rect.X), Utility.PixelsToEmu(rect.Y), 
-                    Utility.PixelsToEmu(rect.Width), Utility.PixelsToEmu(rect.Height), rect.BackgroundColor);
+                var facade = new RectangleShapeFacade();
+                facade.BackgroundColor = rect.BackgroundColor;
+                rect.Facade = _SlideFacade.DrawRectangle(Utility.PixelsToEmu(rect.X), Utility.PixelsToEmu(rect.Y),
+                    Utility.PixelsToEmu(rect.Width), Utility.PixelsToEmu(rect.Height), facade.BackgroundColor, facade);
                 rect.ShapeIndex = _Rectangles.Count + 1;
                 _Rectangles.Add(rect);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding rectangular shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a triangular shape
+        /// </summary>
+        /// <param name="triangle"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawTriangle(Triangle triangle)
+        {
+            try
+            {
+                var facade = new TriangleShapeFacade();
+                facade.BackgroundColor = triangle.BackgroundColor;
+                triangle.Facade = _SlideFacade.DrawTriangle(Utility.PixelsToEmu(triangle.X), Utility.PixelsToEmu(triangle.Y),
+                    Utility.PixelsToEmu(triangle.Width), Utility.PixelsToEmu(triangle.Height), facade.BackgroundColor, facade);
+                triangle.ShapeIndex = _Triangles.Count + 1;
+                _Triangles.Add(triangle);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding triangular shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a diamond shape
+        /// </summary>
+        /// <param name="diamond"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawDiamond(Diamond diamond)
+        {
+            try
+            {
+                var facade = new DiamondShapeFacade();
+                facade.BackgroundColor = diamond.BackgroundColor;
+                diamond.Facade = _SlideFacade.DrawDiamond(Utility.PixelsToEmu(diamond.X), Utility.PixelsToEmu(diamond.Y),
+                    Utility.PixelsToEmu(diamond.Width), Utility.PixelsToEmu(diamond.Height), facade.BackgroundColor, facade);
+                diamond.ShapeIndex = _Diamonds.Count + 1;
+                _Diamonds.Add(diamond);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding diamond shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a line shape
+        /// </summary>
+        /// <param name="line"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawLine(Line line)
+        {
+            try
+            {
+                var facade = new LineFacade();
+                line.Facade = _SlideFacade.DrawLine(Utility.PixelsToEmu(line.X), Utility.PixelsToEmu(line.Y),
+                    Utility.PixelsToEmu(line.Width), Utility.PixelsToEmu(line.Height), facade);
+                line.ShapeIndex = _Lines.Count + 1;
+                _Lines.Add(line);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding line shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a curved line
+        /// </summary>
+        /// <param name="curvedLine"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawCurvedLine(CurvedLine curvedLine)
+        {
+            try
+            {
+                var facade = new CurvedLineFacade();
+                curvedLine.Facade = _SlideFacade.DrawCurvedLine(Utility.PixelsToEmu(curvedLine.X), Utility.PixelsToEmu(curvedLine.Y),
+                    Utility.PixelsToEmu(curvedLine.Width), Utility.PixelsToEmu(curvedLine.Height), facade);
+                curvedLine.ShapeIndex = _CurvedLines.Count + 1;
+                _CurvedLines.Add(curvedLine);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding curved line shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw an arrow shape
+        /// </summary>
+        /// <param name="arrow"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawArrow(Arrow arrow)
+        {
+            try
+            {
+                var facade = new ArrowFacade();
+                facade.Animation = arrow.Animation;
+                arrow.Facade = _SlideFacade.DrawArrow(Utility.PixelsToEmu(arrow.X), Utility.PixelsToEmu(arrow.Y),
+                    Utility.PixelsToEmu(arrow.Width), Utility.PixelsToEmu(arrow.Height), facade);
+                arrow.ShapeIndex = _Arrows.Count + 1;
+                _Arrows.Add(arrow);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding arrow shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a double arrow shape
+        /// </summary>
+        /// <param name="doubleArrow"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawDoubleArrow(DoubleArrow doubleArrow)
+        {
+            try
+            {
+                var facade = new DoubleArrowFacade();
+                facade.Animation = doubleArrow.Animation;
+                doubleArrow.Facade = _SlideFacade.DrawDoubleArrow(Utility.PixelsToEmu(doubleArrow.X), Utility.PixelsToEmu(doubleArrow.Y),
+                    Utility.PixelsToEmu(doubleArrow.Width), Utility.PixelsToEmu(doubleArrow.Height), facade);
+                doubleArrow.ShapeIndex = _DoubleArrows.Count + 1;
+                _DoubleArrows.Add(doubleArrow);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding double arrow shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a double brace shape
+        /// </summary>
+        /// <param name="doubleBrace"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawDoubleBrace(DoubleBrace doubleBrace)
+        {
+            try
+            {
+                var facade = new DoubleBraceFacade();
+                facade.Animation = doubleBrace.Animation;
+                doubleBrace.Facade = _SlideFacade.DrawDoubleBrace(Utility.PixelsToEmu(doubleBrace.X), Utility.PixelsToEmu(doubleBrace.Y),
+                    Utility.PixelsToEmu(doubleBrace.Width), Utility.PixelsToEmu(doubleBrace.Height), facade);
+                doubleBrace.ShapeIndex = _DoubleBraces.Count + 1;
+                _DoubleBraces.Add(doubleBrace);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding double brace shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a double bracket shape
+        /// </summary>
+        /// <param name="doubleBracket"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawDoubleBracket(DoubleBracket doubleBracket)
+        {
+            try
+            {
+                var facade = new DoubleBracketFacade();
+                facade.Animation= doubleBracket.Animation;
+                doubleBracket.Facade = _SlideFacade.DrawDoubleBracket(Utility.PixelsToEmu(doubleBracket.X), Utility.PixelsToEmu(doubleBracket.Y),
+                    Utility.PixelsToEmu(doubleBracket.Width), Utility.PixelsToEmu(doubleBracket.Height), facade);
+                doubleBracket.ShapeIndex = _DoubleBrackets.Count + 1;
+                _DoubleBrackets.Add(doubleBracket);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding double bracket shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a pentagon shape
+        /// </summary>
+        /// <param name="pentagon"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawPentagon(Pentagon pentagon)
+        {
+            try
+            {
+                var facade = new PentagonFacade();
+                facade.Animation= pentagon.Animation;
+                pentagon.Facade = _SlideFacade.DrawPentagon(Utility.PixelsToEmu(pentagon.X), Utility.PixelsToEmu(pentagon.Y),
+                    Utility.PixelsToEmu(pentagon.Width), Utility.PixelsToEmu(pentagon.Height), facade);
+                pentagon.ShapeIndex = _Pentagons.Count + 1;
+                _Pentagons.Add(pentagon);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding pentagon shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a hexagon shape
+        /// </summary>
+        /// <param name="hexagon"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawHexagon(Hexagon hexagon)
+        {
+            try
+            {
+                var facade = new HexagonFacade();
+                facade.Animation = hexagon.Animation;
+                hexagon.Facade = _SlideFacade.DrawHexagon(Utility.PixelsToEmu(hexagon.X), Utility.PixelsToEmu(hexagon.Y),
+                    Utility.PixelsToEmu(hexagon.Width), Utility.PixelsToEmu(hexagon.Height), facade);
+                hexagon.ShapeIndex = _Hexagons.Count + 1;
+                _Hexagons.Add(hexagon);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding hexagon shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        /// <summary>
+        /// Method to draw a trapezoid shape
+        /// </summary>
+        /// <param name="trapezoid"></param>
+        /// <exception cref="Common.OpenizeException"></exception>
+        public void DrawTrapezoid(Trapezoid trapezoid)
+        {
+            try
+            {
+                var facade = new TrapezoidFacade();
+                facade.Animation= trapezoid.Animation;
+                trapezoid.Facade = _SlideFacade.DrawTrapezoid(Utility.PixelsToEmu(trapezoid.X), Utility.PixelsToEmu(trapezoid.Y),
+                    Utility.PixelsToEmu(trapezoid.Width), Utility.PixelsToEmu(trapezoid.Height), facade);
+                trapezoid.ShapeIndex = _Trapezoids.Count + 1;
+                _Trapezoids.Add(trapezoid);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding trapezoid shape");
+                throw new Common.OpenizeException(errorMessage, ex);
+            }
+        }
+
+        public void DrawPie(Pie pie)
+        {
+            try
+            {
+                var Facade= new PieFacade();
+                Facade.Animation= pie.Animation;
+               pie.Facade = _SlideFacade.DrawPie(Utility.PixelsToEmu(pie.X), Utility.PixelsToEmu(pie.Y),
+                   Utility.PixelsToEmu(pie.Width), Utility.PixelsToEmu(pie.Height), Facade);
+                pie.ShapeIndex = _Pies.Count + 1;
+                Pies.Add(pie);
             }
             catch (Exception ex)
             {
@@ -175,7 +537,7 @@ namespace Openize.Slides
             }
         }
         /// <summary>
-        /// Method to draw a circle in a slide 
+        /// Method to draw a circular shape
         /// </summary>
         /// <param name="circle"></param>
         /// <exception cref="Common.OpenizeException"></exception>
@@ -183,17 +545,21 @@ namespace Openize.Slides
         {
             try
             {
+                var facade = new CircleShapeFacade();
+                facade.Animation= circle.Animation;
+                facade.BackgroundColor = circle.BackgroundColor;
                 circle.Facade = _SlideFacade.DrawCircle(Utility.PixelsToEmu(circle.X), Utility.PixelsToEmu(circle.Y),
-                    Utility.PixelsToEmu(circle.Width), Utility.PixelsToEmu(circle.Height), circle.BackgroundColor);
-                circle.ShapeIndex = _Rectangles.Count + 1;
+                    Utility.PixelsToEmu(circle.Width), Utility.PixelsToEmu(circle.Height), facade.BackgroundColor, facade);
+                circle.ShapeIndex = _Circles.Count + 1;
                 _Circles.Add(circle);
             }
             catch (Exception ex)
             {
-                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding text shape");
+                string errorMessage = Common.OpenizeException.ConstructMessage(ex, "Adding circular shape");
                 throw new Common.OpenizeException(errorMessage, ex);
             }
         }
+
         /// <summary>
         /// Method to add/update note to a slide
         /// </summary>

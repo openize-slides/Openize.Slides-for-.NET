@@ -32,6 +32,7 @@ namespace Openize.Slides.Facade
         private List<TextSegmentFacade> _TextSegmentFacades;
         private String _BackgroundColor;
         private ListFacade _TextList = null;
+        private AnimationType _Animation = AnimationType.None;
         public string Text { get => _Text; set => _Text = value; }
         // Public property to set and get font size in points
         public int FontSize
@@ -60,6 +61,7 @@ namespace Openize.Slides.Facade
         public List<TextSegmentFacade> TextSegmentFacades { get => _TextSegmentFacades; set => _TextSegmentFacades = value; }
         public string BackgroundColor { get => _BackgroundColor; set => _BackgroundColor = value; }
         public ListFacade TextList { get => _TextList; set => _TextList = value; }
+        public AnimationType Animation { get => _Animation; set => _Animation = value; }
 
         public TextShapeFacade ()
         {
@@ -661,21 +663,18 @@ namespace Openize.Slides.Facade
             }
         }
 
-        private static TextAlignment ConvertAlignmentFromTypeValues (TextAlignmentTypeValues alignmentType)
+        private static TextAlignment ConvertAlignmentFromTypeValues(TextAlignmentTypeValues alignmentType)
         {
-            switch (alignmentType)
-            {
-                case TextAlignmentTypeValues.Left:
-                    return TextAlignment.Left;
-                case TextAlignmentTypeValues.Center:
-                    return TextAlignment.Center;
-                case TextAlignmentTypeValues.Right:
-                    return TextAlignment.Right;
-                case TextAlignmentTypeValues.Justified:
-                    return TextAlignment.None;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(alignmentType), alignmentType, null);
-            }
+            if (alignmentType.Equals(TextAlignmentTypeValues.Left))
+                return TextAlignment.Left;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Center))
+                return TextAlignment.Center;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Right))
+                return TextAlignment.Right;
+            if (alignmentType.Equals(TextAlignmentTypeValues.Justified))
+                return TextAlignment.None;
+
+            throw new ArgumentOutOfRangeException(nameof(alignmentType), alignmentType, null);
         }
     }
 }

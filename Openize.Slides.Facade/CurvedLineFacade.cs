@@ -15,54 +15,54 @@ using Openize.Slides.Common;
 
 namespace Openize.Slides.Facade
 {
-    public class CircleShapeFacade
+    public class CurvedLineFacade
     {
-
+        
         private long _x;
         private long _y;
         private long _width;
         private long _height;
-        private P.Shape _CircleShape;
+        private P.Shape _CurvedLineShape;
         private SlidePart _AssociatedSlidePart;// Store the P.Shape as a private field
         private int _ShapeIndex;
         private AnimationType _Animation = AnimationType.None;
 
         private String _BackgroundColor;
         private ListFacade _TextList = null;
-
+       
         public long X { get => _x; set => _x = value; }
         public long Y { get => _y; set => _y = value; }
         public long Width { get => _width; set => _width = value; }
         public long Height { get => _height; set => _height = value; }
-        public P.Shape CircleShape { get => _CircleShape; set => _CircleShape = value; }
+        public P.Shape CurvedLineShape { get => _CurvedLineShape; set => _CurvedLineShape = value; }
         public SlidePart AssociatedSlidePart { get => _AssociatedSlidePart; set => _AssociatedSlidePart = value; }
         public int ShapeIndex { get => _ShapeIndex; set => _ShapeIndex = value; }
         public string BackgroundColor { get => _BackgroundColor; set => _BackgroundColor = value; }
         public ListFacade TextList { get => _TextList; set => _TextList = value; }
         public AnimationType Animation { get => _Animation; set => _Animation = value; }
 
-        public CircleShapeFacade()
+        public CurvedLineFacade()
         {
-
-
+            
+           
 
         }
 
-        public CircleShapeFacade WithBackgroundColor(String backgroundColor)
+        public CurvedLineFacade WithBackgroundColor(String backgroundColor)
         {
             BackgroundColor = backgroundColor;
             return this;
         }
+       
 
-
-        public CircleShapeFacade WithPosition(long x, long y)
+        public CurvedLineFacade WithPosition(long x, long y)
         {
             X = x;
             Y = y;
             return this;
         }
 
-        public CircleShapeFacade WithSize(long width, long height)
+        public CurvedLineFacade WithSize(long width, long height)
         {
             Width = width;
             Height = height;
@@ -71,7 +71,7 @@ namespace Openize.Slides.Facade
 
         public P.Shape CreateShape()
         {
-
+            
             P.Shape shape1 = new P.Shape();
             shape1.Append(CreateNonVisualShapeProperties());
             if (_BackgroundColor is null)
@@ -84,8 +84,8 @@ namespace Openize.Slides.Facade
 
             return shape1;
         }
-
-
+      
+       
 
         private P.ShapeStyle CreateShapeStyle()
         {
@@ -133,8 +133,13 @@ namespace Openize.Slides.Facade
             transform2D1.Append(offset1);
             transform2D1.Append(extents1);
 
-            D.PresetGeometry presetGeometry1 = new D.PresetGeometry() { Preset = D.ShapeTypeValues.Ellipse };
+            D.PresetGeometry presetGeometry1 = new D.PresetGeometry() { Preset = D.ShapeTypeValues.CurvedConnector3 };
+            D.ShapeGuide shapeGuide1 = new D.ShapeGuide() { Name = "adj1", Formula = "val 47368" };
+
+
             D.AdjustValueList adjustValueList1 = new D.AdjustValueList();
+
+            adjustValueList1.Append(shapeGuide1);
 
             presetGeometry1.Append(adjustValueList1);
 
@@ -152,7 +157,7 @@ namespace Openize.Slides.Facade
 
              solidFill2.Append(schemeColor1);*/
 
-            // outline1.Append(new NoFill());
+           // outline1.Append(new NoFill());
 
             shapeProperties1.Append(transform2D1);
             shapeProperties1.Append(presetGeometry1);
@@ -180,16 +185,16 @@ namespace Openize.Slides.Facade
 
             textBody1.Append(bodyProperties1);
             textBody1.Append(listStyle1);
-            textBody1.Append(paragraph1);
+            textBody1.Append(paragraph1);           
 
             return textBody1;
         }
-
+        
 
         private P.NonVisualShapeProperties CreateNonVisualShapeProperties()
         {
             P.NonVisualShapeProperties nonVisualShapeProperties1 = new P.NonVisualShapeProperties();
-            P.NonVisualDrawingProperties nonVisualDrawingProperties1 = new P.NonVisualDrawingProperties() { Id = (UInt32Value)9U, Name = "Oval 1" };
+            P.NonVisualDrawingProperties nonVisualDrawingProperties1 = new P.NonVisualDrawingProperties() { Id = (UInt32Value)9U, Name = "Line 8" };
             P.NonVisualShapeDrawingProperties nonVisualShapeDrawingProperties1 = new P.NonVisualShapeDrawingProperties();
             ApplicationNonVisualDrawingProperties applicationNonVisualDrawingProperties1 = new ApplicationNonVisualDrawingProperties();
 
@@ -202,7 +207,7 @@ namespace Openize.Slides.Facade
 
         public void UpdateShape()
         {
-            if (CircleShape == null)
+            if (CurvedLineShape == null)
             {
                 throw new InvalidOperationException("Shape has not been created yet. Call CreateShape() first.");
             }
@@ -211,13 +216,13 @@ namespace Openize.Slides.Facade
 
 
             // Update the properties of the existing shape
-            CircleShape.NonVisualShapeProperties.NonVisualDrawingProperties.Id = (UInt32Value)5U;
-            CircleShape.NonVisualShapeProperties.NonVisualDrawingProperties.Name = "Text Box 1";
-            CircleShape.NonVisualShapeProperties.NonVisualShapeDrawingProperties = new P.NonVisualShapeDrawingProperties(new ShapeLocks() { NoGrouping = true });
-            CircleShape.NonVisualShapeProperties.ApplicationNonVisualDrawingProperties = new ApplicationNonVisualDrawingProperties(new PlaceholderShape());
+            CurvedLineShape.NonVisualShapeProperties.NonVisualDrawingProperties.Id = (UInt32Value)5U;
+            CurvedLineShape.NonVisualShapeProperties.NonVisualDrawingProperties.Name = "Text Box 1";
+            CurvedLineShape.NonVisualShapeProperties.NonVisualShapeDrawingProperties = new P.NonVisualShapeDrawingProperties(new ShapeLocks() { NoGrouping = true });
+            CurvedLineShape.NonVisualShapeProperties.ApplicationNonVisualDrawingProperties = new ApplicationNonVisualDrawingProperties(new PlaceholderShape());
             if (Width != 0)
             {
-                CircleShape.ShapeProperties.Transform2D = new D.Transform2D()
+                CurvedLineShape.ShapeProperties.Transform2D = new D.Transform2D()
                 {
                     Offset = new D.Offset() { X = X, Y = Y },
                     Extents = new D.Extents() { Cx = Width, Cy = Height }
@@ -227,24 +232,24 @@ namespace Openize.Slides.Facade
             {
                 if (_BackgroundColor == "Transparent")
                 {
-                    if (CircleShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault() == null)
+                    if (CurvedLineShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault() == null)
                     {
-                        if (CircleShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault() != null)
-                            CircleShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault().Remove();
+                        if (CurvedLineShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault() != null)
+                            CurvedLineShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault().Remove();
                     }
                     else
                     {
-                        CircleShape.ShapeProperties.Append(new NoFill());
+                        CurvedLineShape.ShapeProperties.Append(new NoFill());
                     }
 
                 }
                 else
                 {
-                    if (CircleShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault() != null)
+                    if (CurvedLineShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault() != null)
                     {
-                        CircleShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault().Remove();
+                        CurvedLineShape.ShapeProperties.Descendants<NoFill>().FirstOrDefault().Remove();
                     }
-                    var fill = CircleShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault();
+                    var fill = CurvedLineShape.ShapeProperties.Descendants<SolidFill>().FirstOrDefault();
 
                     if (fill != null)
                     {
@@ -253,28 +258,28 @@ namespace Openize.Slides.Facade
                     }
                     else
                     {
-                        CircleShape.ShapeProperties.Append(new SolidFill(new RgbColorModelHex() { Val = _BackgroundColor }));
+                        CurvedLineShape.ShapeProperties.Append(new SolidFill(new RgbColorModelHex() { Val = _BackgroundColor }));
                     }
 
                 }
             }
 
-            var existingParagraphText = CircleShape.TextBody.Descendants<Run>().FirstOrDefault();
-            CircleShape.TextBody.Elements<Paragraph>().FirstOrDefault().RemoveAllChildren();
+            var existingParagraphText = CurvedLineShape.TextBody.Descendants<Run>().FirstOrDefault();
+            CurvedLineShape.TextBody.Elements<Paragraph>().FirstOrDefault().RemoveAllChildren();
             if (alignmentType != TextAlignmentTypeValues.Justified)
-                CircleShape.TextBody.Elements<Paragraph>().FirstOrDefault().Append(new ParagraphProperties() { Alignment = alignmentType });
-            CircleShape.TextBody.Elements<Paragraph>().FirstOrDefault().Append(existingParagraphText);
+                CurvedLineShape.TextBody.Elements<Paragraph>().FirstOrDefault().Append(new ParagraphProperties() { Alignment = alignmentType });
+            CurvedLineShape.TextBody.Elements<Paragraph>().FirstOrDefault().Append(existingParagraphText);
 
-            var runProperties = CircleShape.TextBody.Descendants<RunProperties>().FirstOrDefault();
+            var runProperties = CurvedLineShape.TextBody.Descendants<RunProperties>().FirstOrDefault();
 
-
+           
             var latinFont = runProperties.Elements<LatinFont>().FirstOrDefault();
 
-
+          
 
             var solidFill = runProperties.Elements<SolidFill>().FirstOrDefault();
 
-        }
+           }
 
 
         public void RemoveShape(SlidePart slidePart)
@@ -290,7 +295,7 @@ namespace Openize.Slides.Facade
             if (commonSlideData != null && commonSlideData.ShapeTree != null)
             {
                 // Remove the specified shape from the ShapeTree
-                var shapesToRemove = commonSlideData.ShapeTree.Elements<P.Shape>().Where(shape => shape == CircleShape).ToList();
+                var shapesToRemove = commonSlideData.ShapeTree.Elements<P.Shape>().Where(shape => shape == CurvedLineShape).ToList();
 
                 foreach (var shape in shapesToRemove)
                 {
@@ -303,32 +308,32 @@ namespace Openize.Slides.Facade
             shape.Remove();
         }
 
-        private static bool IsCircleShape(P.Shape shape)
+        private static bool IsCurvedLineShape(P.Shape shape)
         {
             var shapeProperties = shape.ShapeProperties;
             if (shapeProperties != null)
             {
                 var presetGeometry = shapeProperties.GetFirstChild<D.PresetGeometry>();
-                if (presetGeometry != null && presetGeometry.Preset == D.ShapeTypeValues.Ellipse)
+                if (presetGeometry != null && presetGeometry.Preset == D.ShapeTypeValues.CurvedConnector3)
                 {
                     return true;
                 }
             }
             return false;
         }
-        // Method to populate List<CircleShapeFacade> from a collection of P.Shape
-        public static List<CircleShapeFacade> PopulateCircleShapes(SlidePart slidePart)
+        // Method to populate List<rectangleShapeFacade> from a collection of P.Shape
+        public static List<CurvedLineFacade> PopulateCurvedLineShapes(SlidePart slidePart)
         {
             IEnumerable<P.Shape> shapes = slidePart.Slide.CommonSlideData.ShapeTree.Elements<P.Shape>();
-            var CircleShapes = new List<CircleShapeFacade>();
+            var rectangleShapes = new List<CurvedLineFacade>();
             var shapeIndex = 0;
             foreach (var shape in shapes)
             {
-                if (IsCircleShape(shape))
+                if (IsCurvedLineShape(shape))
                 {
-                    var CircleShapeFacade = new CircleShapeFacade
+                    var rectangleShapeFacade = new CurvedLineFacade
                     {
-                        CircleShape = shape, // Store the P.Shape in the private field
+                        CurvedLineShape = shape, // Store the P.Shape in the private field
 
 
 
@@ -340,27 +345,27 @@ namespace Openize.Slides.Facade
                         ShapeIndex = shapeIndex
                     };
 
-                    CircleShapes.Add(CircleShapeFacade);
+                    rectangleShapes.Add(rectangleShapeFacade);
                     shapeIndex += 1;
                 }
             }
 
-            return CircleShapes;
+            return rectangleShapes;
         }
 
-        private static string GetTextFromCircleShape(P.Shape CircleShape)
+        private static string GetTextFromrectangleShape(P.Shape rectangleShape)
         {
-            if (CircleShape.TextBody != null)
+            if (rectangleShape.TextBody != null)
             {
-                return CircleShape.TextBody.Descendants<Text>().FirstOrDefault()?.Text;
+                return rectangleShape.TextBody.Descendants<Text>().FirstOrDefault()?.Text;
             }
             return null;
         }
 
-
-        private static string GetFontFamilyFromCircleShape(P.Shape CircleShape)
+      
+          private static string GetFontFamilyFromrectangleShape(P.Shape rectangleShape)
         {
-            var paragraph = CircleShape.TextBody?.Elements<Paragraph>().FirstOrDefault();
+            var paragraph = rectangleShape.TextBody?.Elements<Paragraph>().FirstOrDefault();
 
             if (paragraph != null)
             {
@@ -379,9 +384,9 @@ namespace Openize.Slides.Facade
 
             return null; // or an appropriate default value for FontFamily
         }
-        private static string GetColorFromCircleShape(P.Shape CircleShape)
+        private static string GetColorFromrectangleShape(P.Shape rectangleShape)
         {
-            var paragraph = CircleShape.TextBody?.Elements<Paragraph>().FirstOrDefault();
+            var paragraph = rectangleShape.TextBody?.Elements<Paragraph>().FirstOrDefault();
 
             if (paragraph != null)
             {
@@ -406,16 +411,16 @@ namespace Openize.Slides.Facade
             return null; // or an appropriate default value for color code
         }
 
-        private static TextAlignment GetAlignmentFromCircleShape(P.Shape CircleShape)
+        private static TextAlignment GetAlignmentFromCurvedLineShape(P.Shape rectangleShape)
         {
-            var alignment = CircleShape.TextBody?.Descendants<Paragraph>().FirstOrDefault();
+            var alignment = rectangleShape.TextBody?.Descendants<Paragraph>().FirstOrDefault();
             if (alignment != null)
             {
                 alignment = null;
             }
-            var paragraphProperties = CircleShape?.Descendants<P.TextBody>()?.FirstOrDefault()?.Descendants<Paragraph>()?
+            var paragraphProperties = rectangleShape?.Descendants<P.TextBody>()?.FirstOrDefault()?.Descendants<Paragraph>()?
                    .FirstOrDefault();
-            TextAlignmentTypeValues alignmentType = CircleShape.TextBody.Descendants<ParagraphProperties>().FirstOrDefault()?.Alignment ?? TextAlignmentTypeValues.Justified;
+            TextAlignmentTypeValues alignmentType = rectangleShape.TextBody.Descendants<ParagraphProperties>().FirstOrDefault()?.Alignment ?? TextAlignmentTypeValues.Justified;
             return ConvertAlignmentFromTypeValues(alignmentType);
         }
 

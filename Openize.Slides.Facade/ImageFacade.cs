@@ -29,7 +29,7 @@ namespace Openize.Slides.Facade
         private Int64Value _width;
         private Int64Value _height;
         private List<ImageFacade> Images;
-
+        private AnimationType _Animation = AnimationType.None;
         public string ImagePath { get => _ImagePath; set => _ImagePath = value; }
         public SlidePart ImageSlidePart { get => _AssociatedSlidePart; set => _AssociatedSlidePart = value; }
         public ImagePart PicturePart { get => _PicturePart; set => _PicturePart = value; }
@@ -41,6 +41,7 @@ namespace Openize.Slides.Facade
         public Int64Value Width { get => _width; set => _width = value; }
         public Int64Value Height { get => _height; set => _height = value; }
         public List<ImageFacade> Images1 { get => Images; set => Images = value; }
+        public AnimationType Animation { get => _Animation; set => _Animation = value; }
 
         public ImageFacade ()
         {
@@ -75,7 +76,7 @@ namespace Openize.Slides.Facade
 
             D.NonVisualDrawingPropertiesExtension nonVisualDrawingPropertiesExtension1 = new D.NonVisualDrawingPropertiesExtension() { Uri = "{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}" };
 
-            OpenXmlUnknownElement openXmlUnknownElement1 = OpenXmlUnknownElement.CreateOpenXmlUnknownElement("<a16:creationId xmlns:a16=\"http://schemas.microsoft.com/office/drawing/2014/main\" id=\"{4C9EFE4F-2DDB-7B29-01C3-5A94A8DA92D4}\" />");
+            OpenXmlUnknownElement openXmlUnknownElement1 = new OpenXmlUnknownElement("<a16:creationId xmlns:a16=\"http://schemas.microsoft.com/office/drawing/2014/main\" id=\"{4C9EFE4F-2DDB-7B29-01C3-5A94A8DA92D4}\" />");
 
             nonVisualDrawingPropertiesExtension1.Append(openXmlUnknownElement1);
 
